@@ -13,9 +13,9 @@ import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { SharedModule } from './shared/shared.module';
 
 import { StoreModule} from '@ngrx/store';
-import * as fromApp from './store/app.reducer';
+
 import { EffectsModule } from '@ngrx/effects';
-import { AuthEffects } from './auth/store/auth.effects';
+import { CoreModule } from './core.module';
 
 
 @NgModule({
@@ -25,19 +25,16 @@ import { AuthEffects } from './auth/store/auth.effects';
   ],
   imports: [
     BrowserModule,
-    FormsModule,
+    // FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    
+
     SharedModule,
-    StoreModule.forRoot(fromApp.appReducer),
-    EffectsModule.forRoot([AuthEffects])
+    CoreModule
+    //StoreModule.forRoot(fromApp.appReducer),
+    //EffectsModule.forRoot([AuthEffects])
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthInterceptorService,
-    multi: true
-  }],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
